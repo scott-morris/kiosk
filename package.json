@@ -1,0 +1,11 @@
+{
+  "name": "kiosk",
+  "version": "0.0.1",
+  "description": "Simple kiosk akin to MagicMirror",
+  "main": "index.js",
+  "repository": "https://github.com/scott-morris/kiosk.git",
+  "author": "Scott Morris <scott.r.morris@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["client", "server", "common"]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@kiosk/server",
+  "version": "0.0.1",
+  "description": "Web server for gathering presentation data.",
+  "main": "index.js",
+  "scripts": {
+    "start": "./index.js",
+    "build": "./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kiosk"
+  ],
+  "author": "Scott Morris",
+  "license": "ISC",
+  "dependencies": {
+    "apple-icloud": "^1.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "prompt": "^1.0.0",
+    "serve": "^11.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "prettier": "^2.0.5"
+  }
+}

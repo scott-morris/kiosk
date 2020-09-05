@@ -2185,10 +2185,9 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apple-icloud@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/apple-icloud/-/apple-icloud-1.1.0.tgz#642eab6346903861f4b84b313835c42416aa9714"
-  integrity sha512-2PzcaeUjduZJHX3szOy0oJfDVE7T2EmnYi7dkyh96Qg8zcNd2g1GYaMkhchs/EsstailvTuXu25jxeJyec2XHQ==
+"apple-icloud@git://github.com/scott-morris/iCloud-API#4e4e8c5e57e033b772056d2e25d04fd344482dba":
+  version "1.0.2"
+  resolved "git://github.com/scott-morris/iCloud-API#4e4e8c5e57e033b772056d2e25d04fd344482dba"
   dependencies:
     cookie "^0.3.1"
     prompt "^1.0.0"

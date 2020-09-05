@@ -4,9 +4,9 @@ import moment from 'moment';
 import './Calendar.scss';
 
 const localizer = momentLocalizer(moment);
-const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3000/api' : '/api';
+const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
 
-const MyCalendar = ({ refresh = 15 }) => {
+const MyCalendar = ({ refresh = 60 }) => {
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);

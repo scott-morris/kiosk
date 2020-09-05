@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Libraries.
 
 const cors = require('cors');
@@ -18,7 +20,7 @@ const iCloudEvents = require('./src/icloud/events');
 
 const app = express();
 const { iCloudSettings, ...settings } = secrets;
-const port = 3000;
+const port = 3001;
 const servingFolder = path.resolve(__dirname, '../client/build');
 
 // Public.

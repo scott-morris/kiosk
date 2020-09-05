@@ -6,6 +6,20 @@ import './Calendar.scss';
 const localizer = momentLocalizer(moment);
 const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
 
+// Private.
+
+const COLORS = ['green', 'blue', 'red', 'orange'];
+
+const eventStyleGetter = (event, start, end, isSelected) => {
+  const style = {
+    backgroundColor: COLORS[event.organizerId],
+  };
+
+  return { style };
+};
+
+// Public.
+
 const MyCalendar = ({ refresh = 60 }) => {
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
@@ -41,9 +55,11 @@ const MyCalendar = ({ refresh = 60 }) => {
         <Calendar
           localizer={localizer}
           events={events}
+          allDayAccessor="allDay"
           startAccessor="localStartDate"
           endAccessor="localEndDate"
           style={{ height: 500 }}
+          eventPropGetter={eventStyleGetter}
         />
       </div>
     );

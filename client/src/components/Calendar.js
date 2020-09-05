@@ -58,7 +58,7 @@ const MyCalendar = ({ refresh = 60 }) => {
           allDayAccessor="allDay"
           startAccessor="localStartDate"
           endAccessor="localEndDate"
-          style={{ height: 500 }}
+          style={{ height: '700px' }}
           eventPropGetter={eventStyleGetter}
         />
       </div>

@@ -106,3 +106,5 @@ dist
 # Secrets
 .secrets.json
 session/
+
+sample-data/

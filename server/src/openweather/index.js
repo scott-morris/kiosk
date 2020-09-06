@@ -1,26 +1,37 @@
 // Libraries.
 
 const https = require('https');
+const url = require('url');
 
 // Private.
 
-const getWeatherApi = (lat, lon, openWeatherAPIkey) =>
+const getWeatherApi = (lat, lon, appid) =>
   new Promise((resolve, reject) => {
-    const req = https.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${openWeatherAPIkey}`,
-      (res) => {
-        let data = '';
+    const api = new URL('/data/2.5/onecall', 'https://api.openweathermap.org/');
+    const params = new URLSearchParams({
+      lat,
+      lon,
+      appid,
+      units: 'imperial',
+      exclude: 'minutely',
+    });
+    api.search = params;
 
+    const req = https.get(api.href, (res) => {
+      let data = '';
+
+      if (process.env.VERBOSE) {
         console.log(`openweather api statusCode: ${res.statusCode}`);
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
-
-        res.on('end', () => {
-          resolve(JSON.parse(data));
-        });
       }
-    );
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        resolve(JSON.parse(data));
+      });
+    });
 
     req.on('error', (e) => {
       reject(e);

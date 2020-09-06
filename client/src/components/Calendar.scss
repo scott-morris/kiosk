@@ -1,6 +1,7 @@
 $out-of-range-color: #ccc;
 $out-of-range-bg-color: #333;
 $today-highlight-bg: #444;
+
 @import 'react-big-calendar/lib/sass/styles';
 
 .rbc-toolbar {
@@ -10,5 +11,6 @@ $today-highlight-bg: #444;
 
   .rbc-toolbar-label {
     font-size: 2.5em;
+    font-family: 'Didact Gothic', sans-serif;
   }
 }

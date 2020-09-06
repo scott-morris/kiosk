@@ -1,3 +1,13 @@
+$primary-color: #ccc;
+@import 'loaders.css/src/animations/ball-grid-pulse.scss';
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
+
 .App {
   text-align: center;
 }

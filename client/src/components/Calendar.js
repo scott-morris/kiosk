@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import Loader from 'react-loaders';
 import moment from 'moment';
 import './Calendar.scss';
 
@@ -48,7 +49,7 @@ const MyCalendar = ({ refresh = 60 }) => {
   if (error) {
     return <div>Error {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Loading..</div>;
+    return <Loader type="ball-grid-pulse" />;
   } else {
     return (
       <div>

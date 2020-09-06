@@ -14,9 +14,9 @@ const DateTime = ({ refresh = 1 }) => {
   });
 
   return (
-    <div class="dt-container">
-      <div class="dt-time">{moment(currentTime).format('h:mm A')}</div>
-      <div class="dt-date">{moment(currentTime).format('dddd, MMMM D, YYYY')}</div>
+    <div className="dt-container">
+      <div className="dt-time">{moment(currentTime).format('h:mm A')}</div>
+      <div className="dt-date">{moment(currentTime).format('dddd, MMMM D, YYYY')}</div>
     </div>
   );
 };

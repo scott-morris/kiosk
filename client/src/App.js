@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <AutoPlaySwipeableViews index={index} onChangeIndex={setIndex}>
+      <AutoPlaySwipeableViews index={index} interval={5000} onChangeIndex={setIndex}>
         <Panel1 />
         <Panel2 />
       </AutoPlaySwipeableViews>

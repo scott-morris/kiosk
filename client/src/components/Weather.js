@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loaders';
+import WeatherComponents from './WeatherComponents';
 
 const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
-
-// Private.
-
-const WeatherIcon = (icon, description) => (
-  <div class="weather-icon">
-    <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt={description} />
-  </div>
-);
 
 // Public.
 
@@ -24,12 +17,12 @@ const Weather = ({ refresh = 30000 }) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
           setWeatherData(result);
+          setIsLoaded(true);
         },
         (err) => {
-          setIsLoaded(true);
           setError(err);
+          setIsLoaded(true);
         }
       );
 
@@ -43,7 +36,11 @@ const Weather = ({ refresh = 30000 }) => {
   } else if (!isLoaded) {
     return <Loader type="ball-grid-pulse" />;
   } else {
-    return <div>Weather data received.</div>;
+    return (
+      <div>
+        <WeatherComponents.WeekOverview daysArray={weatherData.daily} />
+      </div>
+    );
   }
 };
 

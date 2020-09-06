@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
-// Components.
+// Views.
 
-import Calendar from './components/Calendar';
-import DateTime from './components/DateTime';
+import Panel1 from './panels/panel-1';
+import Panel2 from './panels/panel-2';
 
 // Styles.
 
@@ -24,13 +24,8 @@ function App() {
   return (
     <div className="App">
       <AutoPlaySwipeableViews index={index} onChangeIndex={setIndex}>
-        <div>
-          <Calendar />
-          <DateTime />
-        </div>
-        <div>
-          <DateTime />
-        </div>
+        <Panel1 />
+        <Panel2 />
       </AutoPlaySwipeableViews>
     </div>
   );

@@ -4,7 +4,9 @@ import React from 'react';
 
 // Components.
 
+import Col from 'react-bootstrap/Col';
 import DayOverview from './DayOverview';
+import Row from 'react-bootstrap/Row';
 
 // Styles.
 
@@ -14,11 +16,13 @@ import './WeekOverview.scss';
 
 const WeekOverview = ({ dailyData, weeklyClass = '' }) => {
   return (
-    <div className={`wc-week ${weeklyClass}`}>
+    <Row className={`wc-week ${weeklyClass}`}>
       {dailyData.map((dayInfo, index) => (
-        <DayOverview key={`weekday-${index}`} dayInfo={dayInfo} />
+        <Col className="wc-weekday" key={`weekday-${index}`}>
+          <DayOverview dayInfo={dayInfo} />
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 };
 

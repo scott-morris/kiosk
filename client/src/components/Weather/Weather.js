@@ -8,14 +8,17 @@ import apiBase from '../../data/api-base';
 
 // Components.
 
+import Col from 'react-bootstrap/Col';
 import CurrentWeather from './CurrentWeather';
+import DateTime from '../DateTime';
 import HourlyOverview from './HourlyOverview';
 import Loading from '../Loading';
+import Row from 'react-bootstrap/Row';
 import WeekOverview from './WeekOverview';
 
 // Public.
 
-const Weather = ({ refresh = 30000 }) => {
+const Weather = ({ refresh = 300 }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [render, setRender] = useState(false);
@@ -42,9 +45,18 @@ const Weather = ({ refresh = 30000 }) => {
 
   return (
     <Loading error={error} isLoading={isLoading}>
-      <CurrentWeather weather={weatherData.current} />
+      <Row>
+        <Col>
+          <CurrentWeather weather={weatherData.current} />
+        </Col>
+        <Col>
+          <DateTime />
+        </Col>
+      </Row>
       <WeekOverview dailyData={weatherData.daily} />
-      <HourlyOverview hourlyData={weatherData.hourly} />
+      <Row>
+        <HourlyOverview hourlyData={weatherData.hourly} />
+      </Row>
     </Loading>
   );
 };

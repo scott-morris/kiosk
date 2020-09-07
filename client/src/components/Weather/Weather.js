@@ -1,23 +1,23 @@
 // Libraries.
 
 import React, { useState, useEffect } from 'react';
-import Loader from 'react-loaders';
+
+// Dependencies.
+
+import apiBase from '../../data/api-base';
 
 // Components.
 
 import CurrentWeather from './CurrentWeather';
 import HourlyOverview from './HourlyOverview';
+import Loading from '../Loading';
 import WeekOverview from './WeekOverview';
-
-// Private.
-
-const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
 
 // Public.
 
 const Weather = ({ refresh = 30000 }) => {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [render, setRender] = useState(false);
   const [weatherData, setWeatherData] = useState({});
 
@@ -27,11 +27,11 @@ const Weather = ({ refresh = 30000 }) => {
       .then(
         (result) => {
           setWeatherData(result);
-          setIsLoaded(true);
+          setIsLoading(false);
         },
         (err) => {
           setError(err);
-          setIsLoaded(true);
+          setIsLoading(false);
         }
       );
 
@@ -40,19 +40,13 @@ const Weather = ({ refresh = 30000 }) => {
     }, refresh * 1000);
   }, [refresh, render]);
 
-  if (error) {
-    return <div>Error {error.message}</div>;
-  } else if (!isLoaded) {
-    return <Loader type="ball-grid-pulse" />;
-  } else {
-    return (
-      <div>
-        <CurrentWeather weather={weatherData.current} />
-        <WeekOverview dailyData={weatherData.daily} />
-        <HourlyOverview hourlyData={weatherData.hourly} />
-      </div>
-    );
-  }
+  return (
+    <Loading error={error} isLoading={isLoading}>
+      <CurrentWeather weather={weatherData.current} />
+      <WeekOverview dailyData={weatherData.daily} />
+      <HourlyOverview hourlyData={weatherData.hourly} />
+    </Loading>
+  );
 };
 
 export default Weather;

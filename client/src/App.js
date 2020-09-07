@@ -22,9 +22,9 @@ function App() {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="App">
+    <div className="App container">
       <AutoPlaySwipeableViews index={index} interval={5000} onChangeIndex={setIndex}>
-        <Panel1 />
+        {/* <Panel1 /> */}
         <Panel2 />
       </AutoPlaySwipeableViews>
     </div>

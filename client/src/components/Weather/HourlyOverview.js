@@ -4,8 +4,8 @@ import React from 'react';
 
 // Public.
 
-const HourlyOverview = ({ hourlyData, HourlyClass = '' }) => {
-  return <div className={`wc-hourly ${HourlyClass}`}></div>;
+const HourlyOverview = ({ hourlyData, className = '', hourlyClass = '' }) => {
+  return <div className={['wc-hourly', className, hourlyClass].join(' ')}></div>;
 };
 
 export default HourlyOverview;

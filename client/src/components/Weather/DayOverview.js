@@ -14,7 +14,7 @@ import './DayOverview.scss';
 
 // Public.
 
-const DayOverview = ({ dayInfo, dailyClass = '' }) => {
+const DayOverview = ({ dayInfo, className = '', dailyClass = '' }) => {
   const thisDate = moment(dayInfo.dt * 1000);
   const dayOfWeek = thisDate.format('ddd');
   const humanReadableDate = thisDate.calendar(null, {
@@ -25,7 +25,7 @@ const DayOverview = ({ dayInfo, dailyClass = '' }) => {
   });
 
   return (
-    <div className={`wc-daily ${dailyClass}`}>
+    <div className={['wc-daily', className, dailyClass].join(' ')}>
       <div className="wc-dow">{dayOfWeek}</div>
       <div className="wc-hrdate">{humanReadableDate}</div>
       <Icon weather={dayInfo.weather} />

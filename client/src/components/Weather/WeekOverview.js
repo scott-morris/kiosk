@@ -14,9 +14,9 @@ import './WeekOverview.scss';
 
 // Public.
 
-const WeekOverview = ({ dailyData, weeklyClass = '' }) => {
+const WeekOverview = ({ dailyData, className = '', weeklyClass = '' }) => {
   return (
-    <Row className={`wc-week ${weeklyClass}`}>
+    <Row className={['wc-week', className, weeklyClass].join(' ')}>
       {dailyData.map((dayInfo, index) => (
         <Col className="wc-weekday" key={`weekday-${index}`}>
           <DayOverview dayInfo={dayInfo} />

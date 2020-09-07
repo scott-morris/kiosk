@@ -38,7 +38,9 @@ const Weather = ({ refresh = 30000 }) => {
   } else {
     return (
       <div>
-        <WeatherComponents.WeekOverview daysArray={weatherData.daily} />
+        <WeatherComponents.CurrentWeather weather={weatherData.current} />
+        <WeatherComponents.WeekOverview dailyData={weatherData.daily} />
+        <WeatherComponents.HourlyOverview hourlyData={weatherData.hourly} />
       </div>
     );
   }

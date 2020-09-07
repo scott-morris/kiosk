@@ -1,0 +1,8 @@
+.wc-temp {
+  font-size: 1.2em;
+
+  &:after {
+    content: '°F';
+    font-size: 0.5em;
+  }
+}

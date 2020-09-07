@@ -1,6 +1,15 @@
+// Libraries.
+
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loaders';
-import WeatherComponents from './WeatherComponents';
+
+// Components.
+
+import CurrentWeather from './CurrentWeather';
+import HourlyOverview from './HourlyOverview';
+import WeekOverview from './WeekOverview';
+
+// Private.
 
 const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
 
@@ -38,9 +47,9 @@ const Weather = ({ refresh = 30000 }) => {
   } else {
     return (
       <div>
-        <WeatherComponents.CurrentWeather weather={weatherData.current} />
-        <WeatherComponents.WeekOverview dailyData={weatherData.daily} />
-        <WeatherComponents.HourlyOverview hourlyData={weatherData.hourly} />
+        <CurrentWeather weather={weatherData.current} />
+        <WeekOverview dailyData={weatherData.daily} />
+        <HourlyOverview hourlyData={weatherData.hourly} />
       </div>
     );
   }

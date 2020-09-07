@@ -1,30 +1,35 @@
+// Libraries.
+
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import Loader from 'react-loaders';
+import Loading from '../Loading';
 import moment from 'moment';
-import './Calendar.scss';
 
-const localizer = momentLocalizer(moment);
-const apiBase = process.env.NODE_ENV === 'development' ? 'http://192.168.1.3:3001/api' : '/api';
+// Dependencies.
+
+import apiBase from '../../data/api-base';
+
+// Styles.
+
+import './Calendar.scss';
 
 // Private.
 
 const COLORS = ['green', 'blue', 'red', 'orange'];
+const localizer = momentLocalizer(moment);
 
-const eventStyleGetter = (event, start, end, isSelected) => {
-  const style = {
+const eventStyleGetter = (event) => ({
+  style: {
     backgroundColor: COLORS[event.organizerId],
-  };
-
-  return { style };
-};
+  },
+});
 
 // Public.
 
 const CalendarMonth = ({ refresh = 60 }) => {
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [render, setRender] = useState(false);
 
   useEffect(() => {
@@ -32,11 +37,11 @@ const CalendarMonth = ({ refresh = 60 }) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
+          setIsLoading(false);
           setEvents(result);
         },
         (err) => {
-          setIsLoaded(true);
+          setIsLoading(false);
           setError(err);
         }
       );
@@ -46,25 +51,19 @@ const CalendarMonth = ({ refresh = 60 }) => {
     }, refresh * 1000);
   }, [refresh, render]);
 
-  if (error) {
-    return <div>Error {error.message}</div>;
-  } else if (!isLoaded) {
-    return <Loader type="ball-grid-pulse" />;
-  } else {
-    return (
-      <div>
-        <Calendar
-          localizer={localizer}
-          events={events}
-          allDayAccessor="allDay"
-          startAccessor="localStartDate"
-          endAccessor="localEndDate"
-          style={{ height: '700px' }}
-          eventPropGetter={eventStyleGetter}
-        />
-      </div>
-    );
-  }
+  return (
+    <Loading error={error} isLoading={isLoading}>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        allDayAccessor="allDay"
+        startAccessor="localStartDate"
+        endAccessor="localEndDate"
+        style={{ height: '700px' }}
+        eventPropGetter={eventStyleGetter}
+      />
+    </Loading>
+  );
 };
 
 export default CalendarMonth;

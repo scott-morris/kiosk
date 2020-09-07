@@ -21,7 +21,7 @@ const eventStyleGetter = (event, start, end, isSelected) => {
 
 // Public.
 
-const MyCalendar = ({ refresh = 60 }) => {
+const CalendarMonth = ({ refresh = 60 }) => {
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,4 +67,4 @@ const MyCalendar = ({ refresh = 60 }) => {
   }
 };
 
-export default MyCalendar;
+export default CalendarMonth;

@@ -30,29 +30,29 @@ const Wind = ({ speed, direction }) => {
 
 // Public.
 
-const CurrentWeather = ({ weather, className = '', currentClass = '' }) => {
+const CurrentWeather = ({ data, className = '', currentClass = '' }) => {
   const [timeAgo, setTimeAgo] = useState(null);
   const [render, setRender] = useState(false);
 
   useEffect(() => {
-    const updatedTime = moment(weather.dt * 1000);
+    const updatedTime = moment(data.dt * 1000);
     setTimeAgo(updatedTime.fromNow());
 
     setTimeout(() => {
       setRender(!render);
     }, 1000);
-  }, [render, weather, className, currentClass]);
+  }, [render, data, className, currentClass]);
 
   return (
     <div className={['wc-current', 'card', 'mb-3', className, currentClass].join(' ')}>
       <div className="row">
-        <Summary className="col-md-4" weather={weather} />
+        <Summary className="col-md-4" weather={data} />
         <div className="wc-current-text col-md-8">
           <div className="card-body">
             <h5 className="card-title">Current Weather</h5>
-            <p className="card-text">{weather.humidity}% humidity</p>
+            <p className="card-text">{data.humidity}% humidity</p>
             <p className="card-text">
-              <Wind speed={weather.wind_speed} direction={weather.wind_deg} />
+              <Wind speed={data.wind_speed} direction={data.wind_deg} />
             </p>
             <p className="card-text">
               <small className="text-muted">Last updated {timeAgo}</small>

@@ -47,15 +47,15 @@ const Weather = ({ refresh = 300 }) => {
     <Loading error={error} isLoading={isLoading}>
       <Row>
         <Col>
-          <CurrentWeather weather={weatherData.current} />
+          <CurrentWeather data={weatherData.current} />
         </Col>
         <Col>
           <DateTime />
         </Col>
       </Row>
-      <WeekOverview dailyData={weatherData.daily} />
+      <WeekOverview data={weatherData.daily} />
       <Row>
-        <HourlyOverview hourlyData={weatherData.hourly} />
+        <HourlyOverview data={weatherData.hourly} />
       </Row>
     </Loading>
   );

@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Components.
 
-import Icon from './Icon';
-import Temperature from './Temperature';
+import Summary from './Summary';
 import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
 
 // Styles.
@@ -46,12 +45,8 @@ const CurrentWeather = ({ weather, className = '', currentClass = '' }) => {
 
   return (
     <div className={['wc-current', 'card', 'mb-3', className, currentClass].join(' ')}>
-      <div className="row no-gutters">
-        <div className="wc-current-summary col-md-4">
-          <Icon weather={weather.weather} />
-          <Temperature className="wc-current-temp" temp={weather.temp} />
-          <Temperature className="wc-current-feels-like" temp={weather.feels_like} />
-        </div>
+      <div className="row">
+        <Summary className="col-md-4" weather={weather} />
         <div className="wc-current-text col-md-8">
           <div className="card-body">
             <h5 className="card-title">Current Weather</h5>

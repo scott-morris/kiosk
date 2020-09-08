@@ -1,0 +1,12 @@
+.wc-summary {
+  text-align: center;
+  font-size: 1.5em;
+
+  .wc-feels-like {
+    font-size: 0.8em;
+    &:before {
+      content: 'Feels like ';
+      font-size: 0.7em;
+    }
+  }
+}

@@ -23,6 +23,7 @@ const DayOverview = ({ dayInfo, className = '', dailyClass = '' }) => {
     nextWeek: 'M-D',
     sameElse: 'M-D',
   });
+  const chanceOfPrecip = Math.round(dayInfo.pop * 100);
 
   return (
     <div className={['wc-daily', className, dailyClass].join(' ')}>
@@ -31,6 +32,7 @@ const DayOverview = ({ dayInfo, className = '', dailyClass = '' }) => {
       <Icon weather={dayInfo.weather} />
       <Temperature temperatureClass="wc-hightemp" temp={dayInfo.temp.max} />
       <Temperature temperatureClass="wc-lowtemp" temp={dayInfo.temp.min} />
+      <div className="wc-chanceOfPrecip">{chanceOfPrecip}%</div>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 .wc-current {
-  text-align: center;
-  font-size: 1.5em;
+  .wc-current-summary {
+    text-align: center;
+    font-size: 1.5em;
+  }
 
   .wc-current-feels-like {
     font-size: 0.8em;
@@ -8,5 +10,11 @@
       content: 'Feels like ';
       font-size: 0.7em;
     }
+  }
+}
+
+.wc-wind {
+  .wc-windDirection {
+    width: 1.5em;
   }
 }

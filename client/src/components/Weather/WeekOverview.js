@@ -17,7 +17,7 @@ import './WeekOverview.scss';
 const WeekOverview = ({ dailyData, className = '', weeklyClass = '' }) => {
   return (
     <Row className={['wc-week', className, weeklyClass].join(' ')}>
-      {dailyData.map((dayInfo, index) => (
+      {dailyData.slice(0, 6).map((dayInfo, index) => (
         <Col className="wc-weekday" key={`weekday-${index}`}>
           <DayOverview dayInfo={dayInfo} />
         </Col>

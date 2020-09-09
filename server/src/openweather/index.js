@@ -13,7 +13,6 @@ const getWeatherApi = (lat, lon, appid) =>
       lon,
       appid,
       units: 'imperial',
-      exclude: 'minutely',
     });
     api.search = params;
 

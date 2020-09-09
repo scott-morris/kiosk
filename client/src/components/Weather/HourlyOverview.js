@@ -1,75 +1,85 @@
 // Libraries.
 
 import React from 'react';
-import { d3, LineChart } from 'react-d3-components';
-import moment from 'moment';
+import { Chart } from 'react-google-charts';
 
 // Components.
 
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 // Styles.
 
 import './HourlyOverview.scss';
 
+// Private.
+
+const NUM_HOURS = 24;
+
+const makeData = (data, titles = [], fields = []) =>
+  data.slice(0, NUM_HOURS).reduce(
+    (arr, item) => {
+      arr.push([new Date(item.dt * 1000)].concat(fields.map((key) => item[key])));
+      return arr;
+    },
+    [[{ type: 'date', label: 'time' }].concat(titles)]
+  );
+
 // Public.
 
 const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {
-  let minTemp = Infinity;
-  let maxTemp = -Infinity;
+  const textStyle = { color: '#ccc' };
+  const gridlines = { color: '#666' };
+  const minorGridlines = { color: '#333' };
+  const chartStyle = {
+    titleTextStyle: { color: 'white' },
+    backgroundColor: { fill: '#222' },
+    width: 1140,
+    height: 400,
+    legend: { textStyle },
+    hAxis: { format: 'ha', textStyle, gridlines, minorGridlines },
+  };
 
-  const hourlyData = data.splice(0, 16).reduce(
-    ([temp, feelsLike, chanceOfRain], item) => {
-      const base = { x: item.dt * 1000 };
-
-      minTemp = Math.min(minTemp, item.temp, item.feels_like);
-      maxTemp = Math.max(maxTemp, item.temp, item.feels_like);
-
-      temp.values.push({ ...base, y: item.temp });
-      feelsLike.values.push({ ...base, y: item.feels_like });
-      chanceOfRain.values.push({ ...base, y: item.pop });
-
-      return [temp, feelsLike, chanceOfRain];
+  const hourlyTemperature = data.slice(0, NUM_HOURS).reduce(
+    (arr, item) => {
+      arr.push([new Date(item.dt * 1000), item.temp, item.feels_like]);
+      return arr;
     },
-    [
-      { label: 'temp', values: [] },
-      { label: 'feels like', values: [] },
-      { label: 'chance of rain', values: [] },
-    ]
+    [[{ type: 'date', label: 'time' }, 'Temperature', 'Feels Like']]
   );
 
-  // debugger;
-  const yScale = d3.scale
-    .linear()
-    .domain([maxTemp + 3, minTemp - 3])
-    .range([0, 350]);
-  const xAxis = {
-    label: 'time',
-    tickFormat: (t) => moment(t).format('h:mm a'),
-  };
-  const yAxis = { tickFormat: (t) => t + `°` };
+  const hourlyPrecipitation = data.slice(0, NUM_HOURS).reduce(
+    (arr, item) => {
+      arr.push([item.pop, new Date(item.dt * 1000)]);
+      return arr;
+    },
+    [['Precip', { type: 'date' }]]
+  );
 
   return (
-    <Row className={['wc-hourlyOverview', className, hourlyOverviewClass].join(' ')}>
-      <Col>
-        <LineChart
-          data={hourlyData}
-          yScale={yScale}
-          xAxis={xAxis}
-          yAxis={yAxis}
-          width={1000}
-          height={400}
-          margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
-          color={'white'}
+    <>
+      <Row className={['wc-hourlyOverview', className, hourlyOverviewClass].join(' ')}>
+        <Chart
+          data={hourlyTemperature}
+          chartType="LineChart"
+          options={{
+            ...chartStyle,
+            title: 'Hourly Forecast',
+            vAxis: { format: '#°F', textStyle, gridlines, minorGridlines },
+          }}
         />
-      </Col>
-      {/* {data.map((dayInfo, index) => (
-          <Col className="wc-hourly" key={`hourly-${index}`}>
-            <Summary weather={dayInfo} />
-          </Col>
-        ))} */}
-    </Row>
+      </Row>
+      <Row>
+        <Chart
+          data={hourlyPrecipitation}
+          chartType="BarChart"
+          options={{
+            ...chartStyle,
+            title: 'Chance of Precipitation',
+            vAxis: { format: '#"', viewWindow: { min: 0 }, textStyle, gridlines, minorGridlines },
+          }}
+        />
+      </Row>
+    </>
   );
 };
 

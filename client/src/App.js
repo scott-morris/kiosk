@@ -1,26 +1,25 @@
 // Base Libraries.
 
-import React, { useState } from 'react';
+import React from 'react';
 
 // View Management.
 
 // import SwipeableViews from 'react-swipeable-views';
 import Switcher from './components/Switcher';
-import { autoPlay } from 'react-swipeable-views-utils';
 
 // Views.
 
-import Panel1 from './panels/panel-1';
-import Panel2 from './panels/panel-2';
+import MonthlyCalendar from './panels/MonthlyCalendar';
+import Weather from './panels/Weather';
 
 // Styles.
 
 import './App.scss';
 
 const App = () => (
-  <Switcher className="App container" seconds={5}>
-    <Panel1 />
-    <Panel2 />
+  <Switcher className="App container" seconds={10}>
+    <Weather />
+    <MonthlyCalendar />
   </Switcher>
 );
 

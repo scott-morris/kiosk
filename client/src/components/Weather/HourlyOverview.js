@@ -30,14 +30,6 @@ const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {
   const textStyle = { color: '#ccc' };
   const gridlines = { color: '#666' };
   const minorGridlines = { color: '#333' };
-  const chartStyle = {
-    titleTextStyle: { color: 'white' },
-    backgroundColor: { fill: '#222' },
-    width: 1140,
-    height: 400,
-    legend: { textStyle },
-    hAxis: { format: 'ha', textStyle, gridlines, minorGridlines },
-  };
 
   const hourlyTemperature = data.slice(0, NUM_HOURS).reduce(
     (arr, item) => {
@@ -47,39 +39,23 @@ const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {
     [[{ type: 'date', label: 'time' }, 'Temperature', 'Feels Like']]
   );
 
-  const hourlyPrecipitation = data.slice(0, NUM_HOURS).reduce(
-    (arr, item) => {
-      arr.push([item.pop, new Date(item.dt * 1000)]);
-      return arr;
-    },
-    [['Precip', { type: 'date' }]]
-  );
-
   return (
-    <>
-      <Row className={['wc-hourlyOverview', className, hourlyOverviewClass].join(' ')}>
-        <Chart
-          data={hourlyTemperature}
-          chartType="LineChart"
-          options={{
-            ...chartStyle,
-            title: 'Hourly Forecast',
-            vAxis: { format: '#°F', textStyle, gridlines, minorGridlines },
-          }}
-        />
-      </Row>
-      <Row>
-        <Chart
-          data={hourlyPrecipitation}
-          chartType="BarChart"
-          options={{
-            ...chartStyle,
-            title: 'Chance of Precipitation',
-            vAxis: { format: '#"', viewWindow: { min: 0 }, textStyle, gridlines, minorGridlines },
-          }}
-        />
-      </Row>
-    </>
+    <Row className={['wc-hourlyOverview', className, hourlyOverviewClass].join(' ')}>
+      <Chart
+        data={hourlyTemperature}
+        chartType="LineChart"
+        options={{
+          title: 'Hourly Forecast',
+          titleTextStyle: textStyle,
+          legend: { textStyle },
+          backgroundColor: { fill: '#222' },
+          width: 1140,
+          height: 400,
+          hAxis: { format: 'ha', textStyle, gridlines, minorGridlines },
+          vAxis: { format: '#°', textStyle, gridlines, minorGridlines },
+        }}
+      />
+    </Row>
   );
 };
 

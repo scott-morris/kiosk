@@ -5,8 +5,8 @@ import React from 'react';
 import Calendar from '../components/Calendar/Month';
 import DateTime from '../components/DateTime';
 
-export default () => (
-  <div>
+export default ({ className }) => (
+  <div className={className}>
     <Calendar />
     <DateTime />
   </div>

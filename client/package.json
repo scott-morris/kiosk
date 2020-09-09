@@ -21,7 +21,6 @@
     "react-google-charts": "^3.0.15",
     "react-loaders": "^3.0.1",
     "react-scripts": "3.4.3",
-    "react-swipeable-views": "^0.13.9",
     "react-toastify": "^6.0.8"
   },
   "scripts": {

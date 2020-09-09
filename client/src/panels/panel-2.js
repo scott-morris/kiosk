@@ -4,4 +4,8 @@ import React from 'react';
 
 import Weather from '../components/Weather/Weather';
 
-export default () => <Weather />;
+export default ({ className }) => (
+  <div className={className}>
+    <Weather />
+  </div>
+);

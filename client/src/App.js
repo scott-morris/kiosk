@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 
 // View Management.
 
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
+import Switcher from './components/Switcher';
 import { autoPlay } from 'react-swipeable-views-utils';
 
 // Views.
@@ -16,19 +17,11 @@ import Panel2 from './panels/panel-2';
 
 import './App.scss';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-function App() {
-  const [index, setIndex] = useState(0);
-
-  return (
-    <div className="App container">
-      <AutoPlaySwipeableViews index={index} interval={5000} onChangeIndex={setIndex}>
-        {/* <Panel1 /> */}
-        <Panel2 />
-      </AutoPlaySwipeableViews>
-    </div>
-  );
-}
+const App = () => (
+  <Switcher className="App container" seconds={5}>
+    <Panel1 />
+    <Panel2 />
+  </Switcher>
+);
 
 export default App;

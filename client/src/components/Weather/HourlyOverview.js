@@ -3,6 +3,10 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
+// Dependencies.
+
+import getClassNames from '../../data/get-class-names';
+
 // Components.
 
 import Row from 'react-bootstrap/Row';
@@ -40,7 +44,7 @@ const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {
   );
 
   return (
-    <Row className={['wc-hourlyOverview', className, hourlyOverviewClass].join(' ')}>
+    <Row className={getClassNames('wc-hourlyOverview', className, hourlyOverviewClass)}>
       <Chart
         data={hourlyTemperature}
         chartType="LineChart"

@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+// Dependencies.
+
+import getClassNames from '../../data/get-class-names';
+
 // Components.
 
 import Summary from './Summary';
@@ -78,7 +82,7 @@ const Wind = ({ speed, direction }) => {
 // Public.
 
 const CurrentWeather = ({ data, precipitationTime, className = '', currentClass = '' }) => (
-  <div className={['wc-current', 'card', 'mb-3', className, currentClass].join(' ')}>
+  <div className={getClassNames('wc-current', 'card', 'mb-3', className, currentClass)}>
     <div className="row">
       <Summary className="col-md-4" weather={data} />
       <div className="wc-current-text col-md-8">

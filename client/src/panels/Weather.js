@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 // Dependencies.
 
 import apiBase from '../data/api-base';
+import getClassNames from '../data/get-class-names';
 import getPrecipitationTime from '../data/get-precipitation-time';
 
 // Components.
@@ -57,7 +58,7 @@ const Weather = ({ refresh = 300, className = '' }) => {
 
   return (
     <Loading error={error} isLoading={isLoading}>
-      <div className={['wc', className].join(' ')}>
+      <div className={getClassNames('wc', className)}>
         <Row>
           <Col>
             <CurrentWeather

@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 
+// Dependencies.
+
+import getClassNames from '../data/get-class-names';
+
 // Styles.
 
 import './Switcher.scss';
@@ -19,7 +23,7 @@ const Switcher = ({ seconds, className, children }) => {
   }, [index, seconds, className, children]);
 
   return (
-    <div className={['switcher', className].join(' ')}>
+    <div className={getClassNames('switcher', className)}>
       {React.Children.map(children, (child, i) => {
         return i === index
           ? child

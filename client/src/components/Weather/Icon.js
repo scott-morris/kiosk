@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 
+// Dependencies.
+
+import getClassNames from '../../data/get-class-names';
+
 // Public.
 
 const Icon = ({ weather, className = '', iconClass = '' }) => {
@@ -19,7 +23,7 @@ const Icon = ({ weather, className = '', iconClass = '' }) => {
   }, [index, weather, className, iconClass]);
 
   return (
-    <div className={['wc-icon', className, iconClass].join(' ')}>
+    <div className={getClassNames('wc-icon', className, iconClass)}>
       <img src={`http://openweathermap.org/img/wn/${entry.icon}@2x.png`} alt={entry.description} />
     </div>
   );

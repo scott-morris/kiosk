@@ -3,6 +3,10 @@
 import React from 'react';
 import moment from 'moment';
 
+// Dependencies.
+
+import getClassNames from '../../data/get-class-names';
+
 // Components.
 
 import Icon from './Icon';
@@ -26,7 +30,7 @@ const DayOverview = ({ dayInfo, className = '', dailyClass = '' }) => {
   const chanceOfPrecip = Math.round(dayInfo.pop * 100);
 
   return (
-    <div className={['wc-daily', className, dailyClass].join(' ')}>
+    <div className={getClassNames('wc-daily', className, dailyClass)}>
       <div className="wc-dow">{dayOfWeek}</div>
       <div className="wc-hrdate">{humanReadableDate}</div>
       <Icon weather={dayInfo.weather} />

@@ -21,7 +21,7 @@ const CalendarMonth = ({ events, eventStyleGetter }) => (
     allDayAccessor="allDay"
     startAccessor="localStartDate"
     endAccessor="localEndDate"
-    style={{ height: '700px' }}
+    style={{ height: '600px' }}
     eventPropGetter={eventStyleGetter}
   />
 );

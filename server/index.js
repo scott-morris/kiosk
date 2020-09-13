@@ -16,6 +16,7 @@ const secrets = require('../.secrets.json');
 const iCloudCollections = require('./src/icloud/collections');
 const iCloudEvents = require('./src/icloud/events');
 const openWeather = require('./src/openweather');
+const news = require('./src/news');
 
 // Local.
 
@@ -35,6 +36,7 @@ const servingFolder = path.resolve(__dirname, '../client/build');
   app.get('/api/icloud/collections', iCloudCollections(iCloudSession, settings));
   app.get('/api/icloud/events', iCloudEvents(iCloudSession, settings));
   app.get('/api/weather', openWeather(settings.weatherSettings, settings));
+  app.get('/api/news', news(settings.newsSettings, settings));
 
   app.listen(port, () => {
     console.log(`Example app serving ${servingFolder} at http://192.168.1.3:${port}`);

@@ -16,7 +16,10 @@
   "dependencies": {
     "apple-icloud": "git://github.com/scott-morris/iCloud-API#4e4e8c5e57e033b772056d2e25d04fd344482dba",
     "cors": "^2.8.5",
+    "dav": "git://github.com/lambdabaa/dav#latest",
     "express": "^4.17.1",
+    "google-news-json": "^1.0.3",
+    "ical-toolkit": "^1.0.9",
     "moment": "^2.27.0",
     "prompt": "^1.0.0",
     "serve": "^11.3.2"

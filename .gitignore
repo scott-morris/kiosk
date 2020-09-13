@@ -105,6 +105,7 @@ dist
 
 # Secrets
 .secrets.json
-session/
 
+session/
 sample-data/
+sandbox/

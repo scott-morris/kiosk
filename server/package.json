@@ -2,10 +2,10 @@
   "name": "@kiosk/server",
   "version": "0.0.1",
   "description": "Web server for gathering presentation data.",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "start": "./index.js",
-    "build": "./index.js",
+    "start": "./src/index.js",
+    "build": "./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

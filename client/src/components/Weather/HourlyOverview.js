@@ -19,15 +19,6 @@ import './HourlyOverview.scss';
 
 const NUM_HOURS = 24;
 
-const makeData = (data, titles = [], fields = []) =>
-  data.slice(0, NUM_HOURS).reduce(
-    (arr, item) => {
-      arr.push([new Date(item.dt * 1000)].concat(fields.map((key) => item[key])));
-      return arr;
-    },
-    [[{ type: 'date', label: 'time' }].concat(titles)]
-  );
-
 // Public.
 
 const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {

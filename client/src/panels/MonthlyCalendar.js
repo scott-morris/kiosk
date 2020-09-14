@@ -33,8 +33,6 @@ export default ({ refresh = 60, className }) => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [render, setRender] = useState(false);
-  const wHeight = window.height;
-  const wWidth = window.width;
 
   useEffect(() => {
     fetch(`${apiBase}/icloud/events`)
@@ -57,20 +55,19 @@ export default ({ refresh = 60, className }) => {
 
   return (
     <Loading error={error} isLoading={isLoading}>
-      <Row className={className}>
-        <Col>
-          <Calendar events={events} eventStyleGetter={eventStyleGetter} />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <DateTime />
-        </Col>
-        <Col>
-          <div>Window Height: {window.screen.height}</div>
-          <div>Window Width: {window.screen.width}</div>
-        </Col>
-      </Row>
+      <div className={className}>
+        <Row>
+          <Col>
+            <Calendar events={events} eventStyleGetter={eventStyleGetter} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <DateTime />
+          </Col>
+          <Col></Col>
+        </Row>
+      </div>
     </Loading>
   );
 };

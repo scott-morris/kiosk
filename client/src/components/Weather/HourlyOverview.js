@@ -53,8 +53,8 @@ const HourlyOverview = ({ data, className = '', hourlyOverviewClass = '' }) => {
           titleTextStyle: textStyle,
           legend: { textStyle },
           backgroundColor: { fill: '#222' },
-          width: 1140,
-          height: 400,
+          width: 1550,
+          height: 200,
           hAxis: { format: 'ha', textStyle, gridlines, minorGridlines },
           vAxis: { format: '#°', textStyle, gridlines, minorGridlines },
         }}

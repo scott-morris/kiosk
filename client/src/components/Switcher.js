@@ -25,7 +25,7 @@ const Switcher = ({ seconds, className, children }) => {
   return (
     <div className={getClassNames('switcher', className)}>
       {React.Children.map(children, (child, i) => {
-        const childClass = i === index ? 'switcher-hide' : 'switcher-show';
+        const childClass = i === index ? 'switcher-show' : 'switcher-hide';
         return React.cloneElement(child, {
           className: getClassNames(child.className, childClass),
         });

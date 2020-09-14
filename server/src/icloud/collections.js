@@ -1,8 +1,9 @@
 // Public.
 
-const middleware = (iCloudSession, options) => async (req, res, next) => {
-  const collections = await iCloudSession.Calendar.getCollections();
-  res.json(collections);
+const middleware = (iCloudSessions, options) => (req, res, next) => {
+  const collections = iCloudSessions.map((session) => session.Calendar.getCollections());
+
+  Promise.all(collections).then((...results) => res.json(results.flat()));
 };
 
 module.exports = middleware;

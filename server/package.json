@@ -19,6 +19,7 @@
     "dav": "git://github.com/lambdabaa/dav#latest",
     "express": "^4.17.1",
     "google-news-json": "^1.0.3",
+    "googleapis": "39",
     "ical-toolkit": "^1.0.9",
     "moment": "^2.27.0",
     "prompt": "^1.0.0",

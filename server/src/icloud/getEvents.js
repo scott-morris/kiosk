@@ -1,16 +1,4 @@
-// Libraries.
-
-const moment = require('moment');
-
-// Private.
-
-const beginningOfLastMonth = () => {
-  return moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD');
-};
-
-const endOfNextMonth = () => {
-  return moment().add(1, 'month').endOf('month').format('YYYY-MM-DD');
-};
+// Public.
 
 const getAllEvents = (iCloudSessions, startDate, endDate) => {
   const events = iCloudSessions.map((session) => session.Calendar.getEvents(startDate, endDate));
@@ -18,16 +6,11 @@ const getAllEvents = (iCloudSessions, startDate, endDate) => {
   return Promise.all(events).then((...results) => results.flat());
 };
 
-// Public.
-
-const middleware = (iCloudSessions, options) => async (req, res, next) => {
-  const startDate = req.query.startDate || beginningOfLastMonth();
-  const endDate = req.query.endDate || endOfNextMonth();
-  const rawEvents = await getAllEvents(iCloudSessions, startDate, endDate);
-
+const dedupeEvents = (events) => {
   const guids = new Set();
   const organizers = [];
-  const events = rawEvents
+
+  return events
     .filter((event) => {
       if (guids.has(event.guid)) {
         return false;
@@ -50,7 +33,15 @@ const middleware = (iCloudSessions, options) => async (req, res, next) => {
         organizerId: organizers.length - 1,
       };
     });
-  res.json(events);
 };
 
-module.exports = middleware;
+const getUniqueEvents = (iCloudSessions, startDate, endDate) => {
+  const allEvents = getAllEvents(iCloudSessions, startDate, endDate);
+  return dedupeEvents(allEvents);
+};
+
+module.exports = {
+  getAllEvents,
+  dedupeEvents,
+  getUniqueEvents,
+};

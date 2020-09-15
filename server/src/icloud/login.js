@@ -24,7 +24,7 @@ const readyHandlerTwoFactor = async (myCloud, username) => {
     });
     return false;
   } else {
-    console.log(`${username} is logged in successfully!`);
+    console.log(`${username} is logged into iCloud successfully!`);
 
     return true;
   }

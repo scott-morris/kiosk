@@ -47,7 +47,7 @@ const getAccessToken = (oAuth2Client, { session }) =>
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  */
-module.exports = ({ session, credentials }) =>
+module.exports = ({ user, session, credentials }) =>
   new Promise((resolve) => {
     const { client_secret, client_id, redirect_uris } = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
@@ -56,6 +56,7 @@ module.exports = ({ session, credentials }) =>
     fs.readFile(session, (err, token) => {
       if (err) return getAccessToken(oAuth2Client, { session, credentials });
       oAuth2Client.setCredentials(JSON.parse(token));
+      console.log(`${user} is logged into Google successfully!`);
       resolve(oAuth2Client);
     });
   });

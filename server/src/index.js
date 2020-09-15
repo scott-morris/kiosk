@@ -9,7 +9,7 @@ const path = require('path');
 
 // Dependencies.
 
-const iCloudLogin = require('./icloud/login');
+const loginAll = require('./login-all');
 const secrets = require('../../.secrets.json');
 
 // Local.
@@ -21,14 +21,15 @@ const servingFolder = path.resolve(__dirname, '../client/build');
 // Public.
 
 (async () => {
-  const [iCloudSessions, googleSessions] = await loginAll(iCloudSettings, googleSettings, settings);
+  const [iCloudSessions, googleSessions] = await loginAll(secrets);
   const settings = { iCloudSessions, googleSessions, ...secrets };
 
   app.use(cors());
   app.use(express.static(servingFolder));
 
   glob.sync(`${path.join(__dirname, 'middleware')}/*.js`).forEach((route) => {
-    app.get(route.path, settings);
+    const mw = require(route);
+    app.get(mw.path, mw.middleware(settings));
   });
 
   app.listen(port, () => {

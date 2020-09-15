@@ -21,11 +21,11 @@ const loginAllGoogle = (googleSettings, settings) => {
 
 // Public.
 
-const loginAll = (iCloudSettings, googleSettings, settings) => {
-  return Promise.all(
+const loginAll = ({ iCloudSettings, googleSettings, ...settings }) => {
+  return Promise.all([
     loginAlliCloud(iCloudSettings, settings),
-    loginAllGoogle(googleSettings, settings)
-  );
+    loginAllGoogle(googleSettings, settings),
+  ]);
 };
 
 module.exports = loginAll;

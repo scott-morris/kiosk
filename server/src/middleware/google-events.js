@@ -1,17 +1,20 @@
 // Dependencies.
 
 const { beginningOfLastMonth, endOfNextMonth } = require('../helpers/dates');
-const { getUniqueEvents } = require('../icloud/getEvents');
+const { getAllEvents } = require('../google/get-events');
 
 // Public.
 
-const middleware = ({ iCloudSessions, ...settings }) => async (req, res, next) => {
-  const startDate = req.query.startDate || beginningOfLastMonth();
-  const endDate = req.query.endDate || endOfNextMonth();
+const middleware = ({ googleSessions, ...settings }) => async (req, res, next) => {
+  const timeMin = req.query.startDate || beginningOfLastMonth({ format: 'YYYY-MM-DDTHH:mm:ssZ' });
+  const timeMax = req.query.endDate || endOfNextMonth({ format: 'YYYY-MM-DDTHH:mm:ssZ' });
 
-  const events = await getUniqueEvents(iCloudSessions, startDate, endDate);
-
-  res.json(events);
+  getAllEvents({ googleSessions, timeMin, timeMax }, settings)
+    .then((events) => res.json(events))
+    .catch((err) => {
+      res.status(err.code);
+      res.send(`<h1>${err.message}</h1><hr /><pre>${JSON.stringify(err, null, 2)}</pre>`);
+    });
 };
 
 module.exports = {

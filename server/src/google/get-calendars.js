@@ -4,18 +4,24 @@ const { google } = require('googleapis');
 
 // Public.
 
-const getCalendars = ({ user, auth }) => {
+const getCalendars = ({ user, auth }, settings) => {
   const calendar = google.calendar({ version: 'v3', auth });
-  calendar.calendarList.list().then(({ data, status }) => {
+  return calendar.calendarList.list().then(({ data, status }) => {
     if (status !== 200) {
       return console.error(`Invalid response code ${status}`);
     }
 
-    console.log(`Found ${data.items.length} Google calendars for ${user}:`);
-    data.items.forEach((item) => {
-      console.log(`- ${item.summaryOverride || item.summary}`);
-    });
+    return data.items.map((item) => ({ ...item, user }));
   });
 };
 
-module.exports = getCalendars;
+const getAllCalendars = (googleSessions, settings) => {
+  const userCalendars = googleSessions.map((session) => getCalendars(session, settings));
+
+  return Promise.all(userCalendars).then((...calendars) => calendars.flat());
+};
+
+module.exports = {
+  getAllCalendars,
+  getCalendars,
+};

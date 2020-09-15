@@ -3,7 +3,7 @@
 // Dependencies.
 
 const iCloudLogin = require('./icloud/login');
-const googleLogin = () => {};
+const googleLogin = require('./google/login');
 
 // Private.
 

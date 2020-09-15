@@ -1,7 +1,7 @@
 // Dependencies.
 
 const { beginningOfLastMonth, endOfNextMonth } = require('../helpers/dates');
-const { getUniqueEvents } = require('../icloud/getEvents');
+const { getUniqueEvents } = require('../icloud/get-events');
 
 // Public.
 

@@ -4,7 +4,7 @@ const { google } = require('googleapis');
 
 // Public.
 
-const getEvents = (auth, calendar, startDate, endDate) => {
+const getEvents = ({ auth, calendarId, startDate, endDate }) => {
   const calendar = google.calendar({ version: 'v3', auth });
   calendar.events.list(
     {

@@ -1,9 +1,11 @@
 const login = require('./login');
-const getEvents = require('./events');
-const getCalendars = require('./calendars');
-const secrets = require('../../../.secrets.json');
+const getEvents = require('./get-events');
+const getCalendars = require('./get-calendars');
+const { googleSettings } = require('../../../.secrets.json');
 
-login(secrets.googleSettings[0]).then((auth) => {
-  getEvents(auth);
-  getCalendars(auth);
+googleSettings.forEach((googleInfo) => {
+  login(googleInfo).then((auth) => {
+    getEvents({ auth });
+    getCalendars({ user: googleInfo.user, auth });
+  });
 });

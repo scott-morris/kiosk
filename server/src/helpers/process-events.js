@@ -114,8 +114,8 @@ module.exports = {
  * @property {String} id the identifier of the event
  * @property {String} title the title of the event
  * @property {String} description additional event information
- * @property {String} startTime the start time of the event in `YYYY-MM-DDTHH:mm:ssZ` format
- * @property {String} endTime the end time of the event in `YYYY-MM-DDTHH:mm:ssZ` format
+ * @property {String} start the start time of the event in `YYYY-MM-DDTHH:mm:ssZ` format
+ * @property {String} end the end time of the event in `YYYY-MM-DDTHH:mm:ssZ` format
  * @property {Boolean} allDay flag to show whether this is an "all day" event
  * @property {Number} [organizerId] a numerical identifier for the organizer
  */

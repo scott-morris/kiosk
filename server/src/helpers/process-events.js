@@ -55,8 +55,8 @@ const iCloudEvents = (events) =>
     id: event.guid,
     title: event.title,
     description: event.description,
-    startTime: standardDate(event.startDate),
-    endTime: standardDate(event.endDate),
+    start: standardDate(event.startDate),
+    end: standardDate(event.endDate),
     allDay: event.allDay,
   }));
 
@@ -73,8 +73,8 @@ const googleEvents = (events) =>
       id: event.id,
       title: event.summary,
       description: event.description,
-      startTime: standardDate(event.start.date),
-      endTime: standardDate(event.end.date),
+      start: standardDate(event.start.date),
+      end: standardDate(event.end.date),
       allDay,
     };
   });

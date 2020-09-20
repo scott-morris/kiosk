@@ -4,12 +4,12 @@ const moment = require('moment');
 
 // Public.
 
-const beginningOfLastMonth = ({ format = 'YYYY-MM-DD' } = {}) => {
-  return moment().subtract(1, 'month').startOf('month').format(format);
+const beginningOfLastMonth = () => {
+  return moment().subtract(1, 'month').startOf('month');
 };
 
-const endOfNextMonth = ({ format = 'YYYY-MM-DD' } = {}) => {
-  return moment().add(1, 'month').endOf('month').format(format);
+const endOfNextMonth = () => {
+  return moment().add(1, 'month').endOf('month');
 };
 
 /**

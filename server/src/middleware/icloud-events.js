@@ -7,10 +7,10 @@ const { standardize } = require('../helpers/process-events');
 // Public.
 
 const middleware = ({ iCloudSessions, ...settings }) => async (req, res, next) => {
-  const startDate = req.query.startDate || beginningOfLastMonth();
-  const endDate = req.query.endDate || endOfNextMonth();
+  const start = req.query.startDate || beginningOfLastMonth();
+  const end = req.query.endDate || endOfNextMonth();
 
-  const rawData = await getAllEvents(iCloudSessions, startDate, endDate);
+  const rawData = await getAllEvents({ iCloudSessions, start, end }, settings);
   const events = standardize(rawData);
 
   res.json(events);

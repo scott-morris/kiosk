@@ -1,6 +1,7 @@
 // Libraries.
 
 const { google } = require('googleapis');
+const moment = require('moment');
 
 // Private.
 
@@ -12,8 +13,10 @@ const calendarDefaults = {
 
 // Public.
 
-const getEvents = ({ session, timeMin, timeMax }, settings) => {
+const getEvents = ({ session, start, end }, settings) => {
   const calendar = google.calendar({ version: 'v3', auth: session.auth });
+  const timeMin = moment(start).format('YYYY-MM-DDTHH:mm:ssZ');
+  const timeMax = moment(end).format('YYYY-MM-DDTHH:mm:ssZ');
 
   return new Promise((resolve, reject) => {
     calendar.events.list(
@@ -35,10 +38,8 @@ const getEvents = ({ session, timeMin, timeMax }, settings) => {
   });
 };
 
-const getAllEvents = ({ googleSessions, timeMin, timeMax }, settings) => {
-  const userEvents = googleSessions.map((session) =>
-    getEvents({ session, timeMin, timeMax }, settings)
-  );
+const getAllEvents = ({ googleSessions, start, end }, settings) => {
+  const userEvents = googleSessions.map((session) => getEvents({ session, start, end }, settings));
 
   return Promise.all(userEvents).then((...events) => events.flat());
 };

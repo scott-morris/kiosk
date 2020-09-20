@@ -15,20 +15,22 @@ const MSG_INVALID =
  * @param {Object} myCloud
  * @param {String} username
  */
-const readyHandlerTwoFactor = async (myCloud, username) => {
-  if (myCloud.twoFactorAuthenticationIsRequired) {
-    prompt.get(['Security Code'], function (err, input) {
-      if (err) return console.error(err);
-      const code = input['Security Code'];
-      myCloud.securityCode = code;
-    });
-    return false;
-  } else {
-    console.log(`${username} is logged into iCloud successfully!`);
-
-    return true;
-  }
-};
+const readyHandlerTwoFactor = (myCloud, username) =>
+  new Promise((resolve, reject) => {
+    if (myCloud.twoFactorAuthenticationIsRequired) {
+      prompt.get(['Security Code'], function (err, input) {
+        if (err) return console.error(err);
+        const code = input['Security Code'];
+        myCloud.securityCode = code;
+        resolve(true);
+      });
+      // return false;
+    } else {
+      console.log(`${username} is logged into iCloud successfully!`);
+      resolve(true);
+      // return true;
+    }
+  });
 
 // Public.
 

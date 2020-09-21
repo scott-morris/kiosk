@@ -35,7 +35,7 @@ export default ({ refresh = 60, className }) => {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
-    fetch(`${apiBase}/icloud/events`)
+    fetch(`${apiBase}/events`)
       .then((res) => res.json())
       .then(
         (result) => {

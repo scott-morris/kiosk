@@ -3,6 +3,10 @@
 const { google } = require('googleapis');
 const moment = require('moment');
 
+// Dependencies.
+
+const { standardize, googleEvents } = require('../helpers/process-events');
+
 // Private.
 
 const calendarDefaults = {
@@ -31,7 +35,8 @@ const getEvents = ({ session, start, end }, settings) => {
           reject(err);
         }
 
-        const events = res.data.items;
+        const rawData = res.data.items;
+        const events = standardize(googleEvents(rawData));
         resolve(events);
       }
     );
@@ -41,7 +46,7 @@ const getEvents = ({ session, start, end }, settings) => {
 const getAllEvents = ({ googleSessions, start, end }, settings) => {
   const userEvents = googleSessions.map((session) => getEvents({ session, start, end }, settings));
 
-  return Promise.all(userEvents).then((...events) => events.flat());
+  return Promise.all(userEvents).then((events) => events.flat());
 };
 
 module.exports = {

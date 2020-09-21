@@ -66,7 +66,7 @@ const iCloudEvents = (events) =>
  * @returns {Array<StandardEvents>}
  */
 const googleEvents = (events) =>
-  events.map((event) => {
+  events.flat().map((event) => {
     const allDay = !containsTime(event.start.date) && !containsTime(event.end.date);
     return {
       organizer: event.organizer.email,

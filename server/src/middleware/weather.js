@@ -38,13 +38,16 @@ const getWeatherApi = (lat, lon, appid) =>
 
 // Public.
 
-const middleware = ({ openWeatherAPIkey }) => async (req, res) => {
-  const lat = req.query.lat || '40.0117764';
-  const lon = req.query.lng || req.query.lon || '-82.7670737';
+const middleware = ({ weatherSettings, ...settings }) => async (req, res) => {
+  const lat = req.query.lat || weatherSettings.lat;
+  const lon = req.query.lng || req.query.lon || weatherSettings.lon;
 
-  const weather = await getWeatherApi(lat, lon, openWeatherAPIkey);
+  const weather = await getWeatherApi(lat, lon, weatherSettings.openWeatherAPIkey);
 
   res.json(weather);
 };
 
-module.exports = middleware;
+module.exports = {
+  path: '/api/weather',
+  middleware,
+};

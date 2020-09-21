@@ -18,9 +18,6 @@ const CalendarMonth = ({ events, eventStyleGetter }) => (
   <Calendar
     localizer={localizer}
     events={events}
-    allDayAccessor="allDay"
-    startAccessor="localStartDate"
-    endAccessor="localEndDate"
     style={{ height: '600px' }}
     eventPropGetter={eventStyleGetter}
   />

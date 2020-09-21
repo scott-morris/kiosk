@@ -1,12 +1,10 @@
 // Libraries.
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // Dependencies.
 
-import apiBase from '../data/api-base';
 import getClassNames from '../data/get-class-names';
-import getPrecipitationTime from '../data/get-precipitation-time';
 
 // Components.
 
@@ -22,61 +20,25 @@ import WeekOverview from '../components/Weather/WeekOverview';
 
 import './Weather.scss';
 
-// Private.
-
-const parseWeatherData = (data) => ({
-  ...data,
-  precipitationTime: getPrecipitationTime(data),
-});
-
 // Public.
 
-const Weather = ({ refresh = 300, className = '' }) => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [render, setRender] = useState(false);
-  const [weatherData, setWeatherData] = useState({});
-
-  useEffect(() => {
-    fetch(`${apiBase}/weather`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWeatherData(parseWeatherData(result));
-          setIsLoading(false);
-        },
-        (err) => {
-          setError(err);
-          setIsLoading(false);
-        }
-      );
-
-    setTimeout(() => {
-      setRender(!render);
-    }, refresh * 1000);
-  }, [refresh, render]);
-
-  return (
-    <Loading error={error} isLoading={isLoading}>
-      <div className={getClassNames('wc', className)}>
-        <Row>
-          <Col>
-            <CurrentWeather
-              data={weatherData.current}
-              precipitationTime={weatherData.precipitationTime}
-            />
-          </Col>
-          <Col>
-            <DateTime />
-          </Col>
-        </Row>
-        <WeekOverview data={weatherData.daily} />
-        <Row>
-          <HourlyOverview data={weatherData.hourly} />
-        </Row>
-      </div>
-    </Loading>
-  );
-};
+const Weather = ({ data, isLoading, error, className = '' }) => (
+  <Loading error={error} isLoading={isLoading}>
+    <div className={getClassNames('wc', className)}>
+      <Row>
+        <Col>
+          <CurrentWeather data={data.current} precipitationTime={data.precipitationTime} />
+        </Col>
+        <Col>
+          <DateTime />
+        </Col>
+      </Row>
+      <WeekOverview data={data.daily} />
+      <Row>
+        <HourlyOverview data={data.hourly} />
+      </Row>
+    </div>
+  </Loading>
+);
 
 export default Weather;

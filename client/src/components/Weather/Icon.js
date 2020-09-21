@@ -6,6 +6,10 @@ import React, { useEffect, useState } from 'react';
 
 import getClassNames from '../../data/get-class-names';
 
+// Styles.
+
+import './Icon.scss';
+
 // Public.
 
 const Icon = ({ weather, className = '', iconClass = '' }) => {

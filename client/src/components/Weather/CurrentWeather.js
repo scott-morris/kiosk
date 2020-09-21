@@ -37,11 +37,10 @@ const Precipitation = ({ time }) => {
 
   return (
     <span>
-      <FontAwesomeIcon
-        className="wc-icon wc-precip-icon"
-        icon={precipFound ? faTint : faTintSlash}
-      />
-      {timeFromNow}
+      <span className="wc-icon-inline">
+        <FontAwesomeIcon className="wc-precip-icon" icon={precipFound ? faTint : faTintSlash} />
+      </span>
+      <span className="wc-precip-time-from-now">{timeFromNow}</span>
     </span>
   );
 };
@@ -68,12 +67,14 @@ const Wind = ({ speed, direction }) => {
   };
 
   return (
-    <span className="wc-wind">
-      <FontAwesomeIcon
-        className="wc-icon wc-windDirection"
-        style={arrowStyle}
-        icon={faLongArrowAltUp}
-      />
+    <span>
+      <span className="wc-icon-inline">
+        <FontAwesomeIcon
+          className="wc-icon wc-windDirection"
+          style={arrowStyle}
+          icon={faLongArrowAltUp}
+        />
+      </span>
       <span className="wc-windSpeed">{speed} mph</span>
     </span>
   );

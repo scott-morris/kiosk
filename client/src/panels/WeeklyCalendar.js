@@ -8,7 +8,7 @@ import Loading from '../components/Loading';
 
 // Components.
 
-import Month from '../components/Calendar/Month';
+import Week from '../components/Calendar/Week';
 import Col from 'react-bootstrap/Col';
 import DateTime from '../components/DateTime';
 import Row from 'react-bootstrap/Row';
@@ -30,7 +30,7 @@ export default ({ data, error, isLoading, className }) => (
     <div className={className}>
       <Row>
         <Col>
-          <Month events={data} eventStyleGetter={eventStyleGetter} />
+          <Week events={data} eventStyleGetter={eventStyleGetter} />
         </Col>
       </Row>
       <Row>

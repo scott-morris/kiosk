@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import apiBase from './data/api-base';
 import getPrecipitationTime from './data/get-precipitation-time';
+import processEvents from './data/process-events';
 
 // View Management.
 
@@ -15,6 +16,7 @@ import Switcher from './components/Switcher';
 
 import MonthlyCalendar from './panels/MonthlyCalendar';
 import Weather from './panels/Weather';
+import WeeklyCalendar from './panels/WeeklyCalendar';
 
 // Styles.
 
@@ -50,19 +52,19 @@ const App = () => {
     fetch(`${apiBase}/events`)
       .then((res) => res.json())
       .then(
-        (data) => {
-          setCalendar({
-            ...calendar,
-            data,
+        (result) => {
+          setCalendar((prev) => ({
+            ...prev,
+            data: processEvents(result),
             loading: false,
-          });
+          }));
         },
         (error) => {
-          setCalendar({
-            ...calendar,
+          setCalendar((prev) => ({
+            ...prev,
             loading: false,
             error,
-          });
+          }));
         }
       );
 
@@ -70,18 +72,18 @@ const App = () => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setWeather({
-            ...weather,
+          setWeather((prev) => ({
+            ...prev,
             data: parseWeatherData(result),
             loading: false,
-          });
+          }));
         },
         (error) => {
-          setWeather({
-            ...weather,
+          setWeather((prev) => ({
+            ...prev,
             loading: false,
             error,
-          });
+          }));
         }
       );
 
@@ -92,8 +94,9 @@ const App = () => {
 
   return (
     <Switcher className="App container" seconds={10}>
-      <Weather data={weather.data} error={weather.error} isLoading={weather.loading} />
+      {/* <Weather data={weather.data} error={weather.error} isLoading={weather.loading} /> */}
       <MonthlyCalendar data={calendar.data} error={calendar.error} isLoading={calendar.loading} />
+      <WeeklyCalendar data={calendar.data} error={calendar.error} isLoading={calendar.loading} />
     </Switcher>
   );
 };

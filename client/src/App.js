@@ -94,9 +94,9 @@ const App = () => {
 
   return (
     <Switcher className="App container" seconds={10}>
-      {/* <Weather data={weather.data} error={weather.error} isLoading={weather.loading} /> */}
-      <MonthlyCalendar data={calendar.data} error={calendar.error} isLoading={calendar.loading} />
       <WeeklyCalendar data={calendar.data} error={calendar.error} isLoading={calendar.loading} />
+      <Weather data={weather.data} error={weather.error} isLoading={weather.loading} />
+      <MonthlyCalendar data={calendar.data} error={calendar.error} isLoading={calendar.loading} />
     </Switcher>
   );
 };

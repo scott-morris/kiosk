@@ -16,6 +16,7 @@ const CalendarMonth = ({ events, eventStyleGetter }) => (
     events={events}
     style={{ height: '600px' }}
     eventPropGetter={eventStyleGetter}
+    toolbar={false}
   />
 );
 

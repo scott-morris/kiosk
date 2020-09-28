@@ -3,14 +3,3 @@ $out-of-range-bg-color: #333;
 $today-highlight-bg: #444;
 
 @import 'react-big-calendar/lib/sass/styles';
-
-.rbc-toolbar {
-  .rbc-btn-group {
-    display: none;
-  }
-
-  .rbc-toolbar-label {
-    font-size: 2.5em;
-    font-family: 'Didact Gothic', sans-serif;
-  }
-}
